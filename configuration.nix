@@ -98,6 +98,7 @@
     zsh
     wget
     starship
+    gh
   ];
 
 
