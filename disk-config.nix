@@ -35,7 +35,43 @@
         };
       };
     };
+
+    disk1 = {
+      type = "disk";
+      device="/dev/sdc";
+      content = {   
+        type = "gpt";
+        partitions = {
+          zfs = {
+            size = "100%";
+            content = {
+              type = "zfs";
+              pool = "data";
+              };
+            };ƒ
+          }
+        };
+      };
+    disk2 = {
+      type = "disk";
+      device="/dev/sdc";
+      content = {   
+        type = "gpt";
+        partitions = {
+          zfs = {
+            size = "100%";
+            content = {
+              type = "zfs";
+              pool = "data";
+              };
+            };
+          }
+        };
+      };
     };
+    zpool = {
+
+    }
     
     lvm_vg = {
       pool = {
