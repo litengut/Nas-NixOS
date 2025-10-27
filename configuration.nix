@@ -7,7 +7,10 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    ./hardware-configuration.nix
+    ./users.nix
+    ./networking.nix
+    ./packages.nix
     ];
 
   # Bootloader.
@@ -15,15 +18,7 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -53,71 +48,14 @@
   console.keyMap = "de";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.max = {
-    isNormalUser = true;
-    description = "max";
-    extraGroups = [ "networkmanager" "wheel" "nixoseditors" ];
-    packages = with pkgs; [];
-  };
-  security.sudo = {
-    enable = true;
-    wheelNeedsPassword = false; # <— members of wheel can sudo without password
-  };
 
-  # 2. Define the group allowed to edit /etc/nixos
-  users.groups.nixoseditors = { };
-
-  # 3. Set ownership and permissions on /etc/nixos
-  systemd.tmpfiles.rules = [
-    "d /etc/nixos 0775 root nixoseditors -"
-  ];
-
-  # 4. (Optional) Allow the user to rebuild NixOS with sudo, no password
-  security.sudo.extraRules = [
-    {
-      users = [ "alex" ];
-      commands = [
-        {
-          command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild switch";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
-
-  users.defaultUserShell = pkgs.zsh;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    git
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    zsh
-    wget
-    starship
-    gh
-  ];
 
-
- programs.zsh.enable = true;
-
- programs.starship = {
-    enable = true;
-    # Configuration written to ~/.config/starship.toml
-    settings = {
-      add_newline = false;
-
-      character = {
-        success_symbol = "[➜](bold green)";
-        error_symbol = "[➜](bold red)";
-      };
-
-      package.disabled = true;
-    };
-  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
