@@ -1,0 +1,1 @@
+nix run nixpkgs#nixos-anywhere -- --flake .#generic --generate-hardware-config nixos-generate-config ./hardware-configuration.nix nixos@192.168.178.157
