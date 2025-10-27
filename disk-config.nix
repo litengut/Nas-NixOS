@@ -2,7 +2,8 @@
 { lib, ... }:
 {
   disko.devices = {
-    disk.disk1 = {
+    disk = {
+      disk1 = {
       device = lib.mkDefault "/dev/sda";
       type = "disk";
       content = {
@@ -34,6 +35,8 @@
         };
       };
     };
+    };
+    
     lvm_vg = {
       pool = {
         type = "lvm_vg";
