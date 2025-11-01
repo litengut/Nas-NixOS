@@ -4,7 +4,7 @@
   disko.devices = {
     disk = {
       main = {
-        device = lib.mkDefault "/dev/sda";
+        device = lib.mkDefault "/dev/disk/by-id/ata-CT500MX500SSD1_2249E68ECF04";
         type = "disk";
         content = {
           type = "gpt";
@@ -36,61 +36,61 @@
         };
       };
 
-      # disk1 = {
-      #   type = "disk";
-      #   device = "/dev/sdb";
-      #   content = {
-      #     type = "gpt";
-      #     partitions = {
-      #       zfs = {
-      #         size = "100%";
-      #         content = {
-      #           type = "zfs";
-      #           pool = "junk";
-      #         };
+      disk1 = {
+        type = "disk";
+        device = "/dev/disk/by-id/ata-Hitachi_HDS722020ALA330_JK1170YBJ25W9D";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "junk";
+              };
 
-      #       };
-      #     };
-      #   };
-      # };
-      # disk2 = {
-      #   type = "disk";
-      #   device = "/dev/sdc";
-      #   content = {
-      #     type = "gpt";
-      #     partitions = {
-      #       zfs = {
-      #         size = "100%";
-      #         content = {
-      #           type = "zfs";
-      #           pool = "junk";
-      #         };
+            };
+          };
+        };
+      };
+      disk2 = {
+        type = "disk";
+        device = "/dev/disk/by-id/ata-ST2000DL003-9VT166_5YD40KQT";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "junk";
+              };
 
-      #       };
+            };
 
-      #     };
-      #   };
-      # };
+          };
+        };
+      };
     };
-    # zpool = {
-    #   junk = {
-    #     type = "zpool";
-    #     mode = "";
-    #     rootFsOptions = {
-    #       compression = "zstd";
-    #       "com.sun:auto-snapshot" = "true";
-    #     };
-    #     postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^junk@blank$' || zfs snapshot junk@blank";
+    zpool = {
+      junk = {
+        type = "zpool";
+        mode = "";
+        rootFsOptions = {
+          compression = "zstd";
+          "com.sun:auto-snapshot" = "true";
+        };
+        postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^junk@blank$' || zfs snapshot junk@blank";
 
-    #     datasets = {
-    #       "junk" = {
-    #         type = "zfs_fs";
-    #         mountpoint = "/mnt/junk";
+        datasets = {
+          "junk" = {
+            type = "zfs_fs";
+            # mountpoint = "/mnt/junk";
 
-    #       };
-    #     };
-    #   };
-    # };
+          };
+        };
+      };
+    };
 
     lvm_vg = {
       pool = {

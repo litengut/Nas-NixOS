@@ -10,6 +10,8 @@
     zsh
     starship
     gh
+    udisks
+    hd-idle
   ];
   programs.zsh.enable = true;
 

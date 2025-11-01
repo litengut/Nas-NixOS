@@ -1,4 +1,5 @@
-fo#!/usr/bin/env bash
+#!/usr/bin/env bash
+
 #
 # I believe there are a few ways to do this:
 #
@@ -16,7 +17,7 @@ set -e
 # $EDITOR configuration.nix
 
 # cd to your config dir
-pushd /etc/nixos
+
 
 # # Early return if no changes were detected (thanks @singiamtel!)
 if git diff --quiet ; then
@@ -29,20 +30,18 @@ fi
 # alejandra . &>/dev/null \
 #   || ( alejandra . ; echo "formatting failed!" && exit 1)
 
-# Shows your changes
+# # Shows your changes
 # git diff -U0 '*.nix'
 
 echo "NixOS Rebuilding..."
 
+
 # Rebuild, output simplified errors, log trackebacks
-sudo nixos-rebuild switch &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
+nix run nixpkgs#nixos-rebuild -- --fast --target-host root@192.168.178.160 --build-host root@192.168.178.160 --flake .#nas --use-remote-sudo switch > nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
 
-# Get current generation metadata
-current=$(nixos-rebuild list-generations | grep current)
+# # Get current generation metadata
+# current=$(nixos-rebuild list-generations | grep current)
 
-# Commit all changes witih the generation metadata
-git commit -am "$current"
+# # Commit all changes witih the generation metadata
+# git commit -am "$current"
 
-
-# Back to where you were
-popd
