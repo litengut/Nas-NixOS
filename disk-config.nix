@@ -36,42 +36,61 @@
         };
       };
 
-      disk1 = {
-        type = "disk";
-        device = "/dev/sdc";
-        content = {
-          type = "gpt";
-          partitions = {
-            zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "data";
-              };
-            };
-          };
-        };
-      };
-      disk2 = {
-        type = "disk";
-        device = "/dev/sdc";
-        content = {
-          type = "gpt";
-          partitions = {
-            zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "data";
-              };
-            };
-          };
-        };
-      };
+      # disk1 = {
+      #   type = "disk";
+      #   device = "/dev/sdb";
+      #   content = {
+      #     type = "gpt";
+      #     partitions = {
+      #       zfs = {
+      #         size = "100%";
+      #         content = {
+      #           type = "zfs";
+      #           pool = "junk";
+      #         };
+
+      #       };
+      #     };
+      #   };
+      # };
+      # disk2 = {
+      #   type = "disk";
+      #   device = "/dev/sdc";
+      #   content = {
+      #     type = "gpt";
+      #     partitions = {
+      #       zfs = {
+      #         size = "100%";
+      #         content = {
+      #           type = "zfs";
+      #           pool = "junk";
+      #         };
+
+      #       };
+
+      #     };
+      #   };
+      # };
     };
     # zpool = {
+    #   junk = {
+    #     type = "zpool";
+    #     mode = "";
+    #     rootFsOptions = {
+    #       compression = "zstd";
+    #       "com.sun:auto-snapshot" = "true";
+    #     };
+    #     postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^junk@blank$' || zfs snapshot junk@blank";
 
-    # }
+    #     datasets = {
+    #       "junk" = {
+    #         type = "zfs_fs";
+    #         mountpoint = "/mnt/junk";
+
+    #       };
+    #     };
+    #   };
+    # };
 
     lvm_vg = {
       pool = {
