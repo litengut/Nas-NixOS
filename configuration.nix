@@ -8,7 +8,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    ./disk-config.nix
+    # ./disk-config.nix
     ./packages.nix
     ./users.nix
     ./networking.nix
