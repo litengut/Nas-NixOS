@@ -12,6 +12,7 @@
     gh
     udisks
     hd-idle
+    hdparm
   ];
   programs.zsh.enable = true;
 
@@ -29,4 +30,13 @@
       package.disabled = true;
     };
   };
+
+  # systemd.services.hd-idle = {
+  #   description = "External HD spin down daemon";
+  #   wantedBy = [ "multi-user.target" ];
+  #   serviceConfig = {
+  #     Type = "forking";
+  #     ExecStart = "${pkgs.hd-idle}/bin/hd-idle -i 300 -c ata -I";
+  #   };
+  # };
 }

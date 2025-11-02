@@ -37,7 +37,7 @@ echo "NixOS Rebuilding..."
 
 
 # Rebuild, output simplified errors, log trackebacks
-nix run nixpkgs#nixos-rebuild -- --fast --target-host root@192.168.178.160 --build-host root@192.168.178.160 --flake .#nas --use-remote-sudo switch > nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
+nix run nixpkgs#nixos-rebuild -- --fast --target-host root@192.168.178.160 --build-host root@192.168.178.160 --flake .#nas --use-remote-sudo switch > nixos-switch.log 
 
 # # Get current generation metadata
 # current=$(nixos-rebuild list-generations | grep current)

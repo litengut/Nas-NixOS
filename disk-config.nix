@@ -38,7 +38,7 @@
 
       disk1 = {
         type = "disk";
-        device = "/dev/disk/by-id/ata-Hitachi_HDS722020ALA330_JK1170YBJ25W9D";
+        device = "/dev/disks/by-id/ata-ST2000DL003-9VT166_5YD40KQT";
         content = {
           type = "gpt";
           partitions = {
@@ -55,7 +55,7 @@
       };
       disk2 = {
         type = "disk";
-        device = "/dev/disk/by-id/ata-ST2000DL003-9VT166_5YD40KQT";
+        device = "/dev/disk/by-id/ata-ST2000DL003-9VT166_5YD9VVEG";
         content = {
           type = "gpt";
           partitions = {
@@ -85,7 +85,7 @@
         datasets = {
           "junk" = {
             type = "zfs_fs";
-            # mountpoint = "/mnt/junk";
+            mountpoint = "/mnt/junk";
 
           };
         };
